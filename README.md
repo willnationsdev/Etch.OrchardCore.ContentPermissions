@@ -4,17 +4,17 @@ Module for Orchard Core to enable configuring access at a content item level.
 
 ## Build Status
 
-[![Build Status](https://secure.travis-ci.org/etchuk/Etch.OrchardCore.ContentPermissions.png?branch=master)](http://travis-ci.org/etchuk/Etch.OrchardCore.ContentPermissions) [![NuGet](https://img.shields.io/nuget/v/Etch.OrchardCore.ContentPermissions.svg)](https://www.nuget.org/packages/Etch.OrchardCore.ContentPermissions)
+[![Build Status](https://secure.travis-ci.org/etchuk/Etch.OrchardCore.ContentPermissions.png?branch=feature/beta3)](http://travis-ci.org/etchuk/Etch.OrchardCore.ContentPermissions) [![NuGet](https://img.shields.io/nuget/v/Etch.OrchardCore.ContentPermissions.svg)](https://www.nuget.org/packages/Etch.OrchardCore.ContentPermissions)
 
 ## Orchard Core Reference
 
-This module is referencing the RC1 build of Orchard Core ([`1.0.0-rc1-10004`](https://www.nuget.org/packages/OrchardCore.Module.Targets/1.0.0-rc1-10004)).
+This module is referencing the beta 3 build of Orchard Core ([`1.0.0-beta3-71077`](https://www.nuget.org/packages/OrchardCore.Module.Targets/1.0.0-beta3-71077)).
 
 ## Installing
 
 This module is available on [NuGet](https://www.nuget.org/packages/Etch.OrchardCore.ContentPermissions). Add a reference to your Orchard Core web project via the NuGet package manager. Search for "Etch.OrchardCore.Fields", ensuring include prereleases is checked.
 
-Alternatively you can [download the source](https://github.com/etchuk/Etch.OrchardCore.ContentPermissions/archive/master.zip) or clone the repository to your local machine. Add the project to your solution that contains an Orchard Core project and add a reference to Etch.OrchardCore.ContentPermissions.
+Alternatively you can [download the source](https://github.com/etchuk/Etch.OrchardCore.ContentPermissions/archive/feature/beta3.zip) or clone the repository to your local machine. Add the project to your solution that contains an Orchard Core project and add a reference to Etch.OrchardCore.ContentPermissions.
 
 ## Usage
 
