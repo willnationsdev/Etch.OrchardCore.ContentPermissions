@@ -2,10 +2,29 @@
 
 @model ContentPermissionsPartSettingsViewModel
 
-<div class="row mb-3">
-    <div class="col-lg">
+<div class="form-group">
+    <div class="custom-control col-lg redirect-wrapper">
         <label asp-for="RedirectUrl">@T["Redirect URL"]</label>
         <input type="text" asp-for="RedirectUrl" class="form-control" />
         <span class="hint">@T["User will be redirected to this URL when unable to access content item. Leave blank to disable redirect and handle user not having permission within view template."]</span>
     </div>
+    <div class="custom-control custom-checkbox">
+        <input type="checkbox" class="custom-control-input block-admin-edit-access" asp-for="BlockAdminEditAccess" checked="@Model.BlockAdminEditAccess" />
+        <label class="custom-control-label" asp-for="BlockAdminEditAccess">@T["Block the user from editing the ContentItem."]</label>
+        <span class="hint">— @T["If true, prevents editing the ContentItem from the admin too."]</span>
+    </div>
 </div>
+<div class="form-group " id="admin-redirect-wrapper">
+    <div class="custom-control col-lg redirect-wrapper">
+        <label asp-for="AdminRedirectUrl">@T["Admin Redirect URL"]</label>
+        <input type="text" asp-for="AdminRedirectUrl" class="form-control" />
+        <span class="hint">@T["User will be redirected to this URL when unable to edit content item. Leave blank to disable redirect and handle user not having permission within view template."]</span>
+    </div>
+</div>
+
+<style>
+    .redirect-wrapper {
+        padding-left: 0px !important;
+        padding-bottom: 10px;
+    }
+</style>

@@ -60,15 +60,33 @@ namespace Etch.OrchardCore.ContentPermissions.Drivers
 
         public override async Task<IDisplayResult> EditAsync(ContentPermissionsPart part, BuildPartEditorContext context)
         {
-            var roles = await _roleService.GetRoleNamesAsync();
+            var settings = _contentPermissionsService.GetSettings(part);
 
-            return Initialize<ContentPermissionsPartEditViewModel>("ContentPermissionsPart_Edit", model =>
+            if (settings.HasAdminRedirectUrl && !_contentPermissionsService.CanAccess(part))
             {
-                model.ContentPermissionsPart = part;
-                model.Enabled = part.Enabled;
-                model.PossibleRoles = roles.ToArray();
-                model.Roles = part.Roles;
-            });
+                var adminRedirectUrl = settings.AdminRedirectUrl;
+
+                if (!settings.AdminRedirectUrl.StartsWith("/"))
+                {
+                    adminRedirectUrl = $"/{adminRedirectUrl}";
+                }
+
+                _httpContextAccessor.HttpContext.Response.StatusCode = 403;
+                _httpContextAccessor.HttpContext.Response.Redirect($"{_httpContextAccessor.HttpContext.Request.PathBase}{adminRedirectUrl}", false);
+                return null;
+            }
+            else
+            {
+                var roles = await _roleService.GetRoleNamesAsync();
+
+                return Initialize<ContentPermissionsPartEditViewModel>("ContentPermissionsPart_Edit", model =>
+                {
+                    model.ContentPermissionsPart = part;
+                    model.Enabled = part.Enabled;
+                    model.PossibleRoles = roles.ToArray();
+                    model.Roles = part.Roles;
+                });
+            }
         }
 
         public override async Task<IDisplayResult> UpdateAsync(ContentPermissionsPart model, IUpdateModel updater, UpdatePartEditorContext context)

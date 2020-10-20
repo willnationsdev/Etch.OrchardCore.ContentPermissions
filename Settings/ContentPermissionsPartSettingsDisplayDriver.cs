@@ -22,6 +22,8 @@ namespace Etch.OrchardCore.ContentPermissions.Settings
                 var settings = contentTypePartDefinition.GetSettings<ContentPermissionsPartSettings>();
 
                 model.RedirectUrl = settings.RedirectUrl;
+                model.BlockAdminEditAccess = settings.BlockAdminEditAccess;
+                model.AdminRedirectUrl = settings.AdminRedirectUrl;
             }).Location("Content");
         }
 
@@ -34,9 +36,13 @@ namespace Etch.OrchardCore.ContentPermissions.Settings
 
             var model = new ContentPermissionsPartSettingsViewModel();
 
-            await context.Updater.TryUpdateModelAsync(model, Prefix, m => m.RedirectUrl);
+            await context.Updater.TryUpdateModelAsync(model, Prefix, m => m.RedirectUrl, m => m.BlockAdminEditAccess, m => m.AdminRedirectUrl);
 
-            context.Builder.WithSettings(new ContentPermissionsPartSettings { RedirectUrl = model.RedirectUrl });
+            context.Builder.WithSettings(new ContentPermissionsPartSettings {
+                RedirectUrl = model.RedirectUrl,
+                BlockAdminEditAccess = model.BlockAdminEditAccess,
+                AdminRedirectUrl = model.AdminRedirectUrl
+            }) ;
 
             return Edit(contentTypePartDefinition, context.Updater);
         }
