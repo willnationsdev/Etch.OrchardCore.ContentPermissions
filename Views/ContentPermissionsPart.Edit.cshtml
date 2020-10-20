@@ -25,10 +25,15 @@
     <div class="row">
         @for (var i = 0; i < Model.PossibleRoles.Length; i++)
         {
+            var currentRole = Model.PossibleRoles[i];
+            var elemIsAdmin = currentRole.Equals("Administrator", StringComparison.OrdinalIgnoreCase);
+            var elemIsChecked = Model.Roles.Contains(currentRole) || elemIsAdmin;
+            var elemIsDisabled = elemIsAdmin;
+
             <div class="col-xs-12 col-sm-6 col-md-4 col-lg-3 col-xl-2">
                 <div class="custom-control custom-checkbox">
-                    <input type="checkbox" class="custom-control-input" id="@(Html.IdFor(m => m.Roles) + "_" + i)" name="@Html.NameFor(m => m.Roles)" value="@Model.PossibleRoles[i]" @(Model.Roles.Contains(Model.PossibleRoles[i]) ? "checked=\"checked\"" : "")>
-                    <label class="custom-control-label" for="@(Html.IdFor(m => m.Roles) + "_" + i)">@Model.PossibleRoles[i]</label>
+                    <input type="checkbox" class="custom-control-input" id="@(Html.IdFor(m => m.Roles) + "_" + i)" name="@Html.NameFor(m => m.Roles)" value="@currentRole" checked="@elemIsChecked" disabled="@elemIsDisabled">
+                    <label class="custom-control-label" for="@(Html.IdFor(m => m.Roles) + "_" + i)">@currentRole</label>
                 </div>
             </div>
         }

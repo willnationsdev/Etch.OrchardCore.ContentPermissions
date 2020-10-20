@@ -45,19 +45,26 @@ namespace Etch.OrchardCore.ContentPermissions.Services
                 return true;
             }
 
-            if (_httpContextAccessor.HttpContext.User == null) 
+            var user = _httpContextAccessor.HttpContext.User;
+
+            if (user == null) 
             {
                 return false;
             }
 
-            if (part.Roles.Contains("Authenticated") && _httpContextAccessor.HttpContext.User.Identity.IsAuthenticated) 
+            if (user.IsInRole("Administrator"))
+            {
+                return true;
+            }
+
+            if (part.Roles.Contains("Authenticated") && user.Identity.IsAuthenticated) 
             {
                 return true;
             }
 
             foreach (var role in part.Roles) 
             {
-                if (_httpContextAccessor.HttpContext.User.IsInRole(role)) 
+                if (user.IsInRole(role)) 
                 {
                     return true;
                 }
